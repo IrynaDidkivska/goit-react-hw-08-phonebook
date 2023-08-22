@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyledFooter } from './Footer.styled';
-import { RiCopyrightLine } from 'react-icons/ri';
+import { LiaCopyrightSolid } from 'react-icons/lia';
 
 const Footer = () => {
   return (
     <StyledFooter>
-      <RiCopyrightLine />
+      <LiaCopyrightSolid />
       <p>2023 Contactville. All rights reserved.</p>
     </StyledFooter>
   );
