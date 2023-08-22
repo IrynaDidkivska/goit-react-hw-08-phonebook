@@ -1,4 +1,3 @@
-import { Contact } from 'components/ContactsList/ContactList.styled';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import React from 'react';
 import { useSelector } from 'react-redux';
