@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Button } from 'styles/Button';
-import { Form, Input } from './RegisterForm.styled';
+import { Input } from './RegisterForm.styled';
 import { useDispatch } from 'react-redux';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { registerUserThunk } from 'redux/auth/operations';
 import { StyledLink, Wrapper } from 'pages/LoginForm/LoginForm.styled';
+import { Form } from 'styles/Form';
+import { toast } from 'react-toastify';
 
-export const RegisterForm = () => {
+const RegisterForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,6 +23,8 @@ export const RegisterForm = () => {
     dispatch(registerUserThunk(credentials))
       .unwrap()
       .then(() => navigate(location.state?.from || '/'));
+    toast.success(`Congradulation! Now you can create your Chronicle of
+        Connections!`);
   };
 
   return (
@@ -51,7 +55,7 @@ export const RegisterForm = () => {
             id="email"
             type="text"
             name="email"
-            //   required
+            required
             placeholder="Enter your email..."
             onChange={({ target }) => {
               setEmail(target.value);
@@ -68,7 +72,7 @@ export const RegisterForm = () => {
             name="password"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title=""
-            //   required
+            required
             placeholder="Enter your password..."
             onChange={({ target }) => {
               setPassword(target.value);
@@ -91,3 +95,5 @@ export const RegisterForm = () => {
     </Wrapper>
   );
 };
+
+export default RegisterForm;

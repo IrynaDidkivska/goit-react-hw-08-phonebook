@@ -1,17 +1,6 @@
 import { styled } from 'styled-components';
 import { Container } from 'styles/Container';
 
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 0 auto;
-  padding: 20px 30px;
-  width: 50vw;
-  outline: 1px solid #baaaaa;
-  border-radius: 3px;
-  overflow: hidden;
-`;
 export const Input = styled.input`
   width: 100%;
   margin-top: 5px;
@@ -25,7 +14,9 @@ export const Wrapper = styled(Container)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 10px;
+  height: 60vh;
 `;
 export const StyledLink = styled.a`
   padding: 5px;

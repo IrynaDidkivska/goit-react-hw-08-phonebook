@@ -5,4 +5,5 @@ export const selectFilter = state => state.contact.filterValue; // поверт�
 
 // Users selectors
 export const selectUser = state => state.user.user;
-export const selectLogin = state => state.user.user.isLoggedIn;
+export const selectLogin = state => state.user.isLoggedIn;
+export const selectRefresh = state => state.user.user.isRefreshing;

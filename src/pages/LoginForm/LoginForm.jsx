@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Button } from 'styles/Button';
 import { useDispatch } from 'react-redux';
-import { Form, Input, StyledLink, Wrapper } from './LoginForm.styled';
+import { Input, StyledLink, Wrapper } from './LoginForm.styled';
 import { loginUserThunk } from 'redux/auth/operations';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Form } from 'styles/Form';
+import { toast } from 'react-toastify';
 
-export const LoginForm = () => {
+const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
@@ -17,7 +19,8 @@ export const LoginForm = () => {
     const credentials = { email, password };
     dispatch(loginUserThunk(credentials))
       .unwrap()
-      .then(() => navigate(location.state?.from || '/'));
+      .then(() => navigate(location.state?.location || '/contacts'));
+    toast.success(`Welcome to Contactville!`);
   };
 
   return (
@@ -33,7 +36,7 @@ export const LoginForm = () => {
             name="email"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            //   required
+            required
             placeholder="Enter your email..."
             autoFocus
             onChange={({ target }) => {
@@ -50,7 +53,7 @@ export const LoginForm = () => {
             name="password"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title=""
-            //   required
+            required
             placeholder="Enter your password..."
             onChange={({ target }) => {
               setPassword(target.value);
@@ -73,3 +76,4 @@ export const LoginForm = () => {
     </Wrapper>
   );
 };
+export default LoginForm;

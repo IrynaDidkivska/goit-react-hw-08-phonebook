@@ -12,3 +12,7 @@ export const LogoutButton = styled(Button)`
   gap: 5px;
   margin: 0;
 `;
+export const LogoutText = styled.p`
+  font-size: 18px;
+  font-weight: 500;
+`;

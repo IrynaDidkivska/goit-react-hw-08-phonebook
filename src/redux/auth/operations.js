@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-// import { API } from 'redux/contactsSlice/operations';
+import { toast } from 'react-toastify';
 
 export const API = axios.create({
   baseURL: 'https://connections-api.herokuapp.com/',
@@ -20,7 +20,6 @@ export const registerUserThunk = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await API.post('users/signup', credentials);
-      console.log(data);
       setToken(data.token);
       return data;
     } catch (error) {
@@ -34,7 +33,6 @@ export const loginUserThunk = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await API.post('users/login', credentials);
-      console.log(data);
       setToken(data.token);
       return data;
     } catch (error) {
@@ -48,8 +46,24 @@ export const logoutThunk = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { data } = await API.post('/users/logout');
-      console.log(data);
       clearToken();
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const refreshThunk = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const savedToken = thunkAPI.getState().user.token;
+    if (!savedToken) {
+      return thunkAPI.rejectWithValue(toast.error(`Token is not exist!`));
+    }
+    try {
+      setToken(savedToken);
+      const { data } = await API.post('users/current');
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

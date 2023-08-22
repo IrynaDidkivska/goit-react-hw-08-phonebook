@@ -1,34 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { ContactForm } from 'components/ContactsForm/ContactForm';
 import { ContactList } from 'components/ContactsList/ContactList';
 import { Loader } from 'components/Loader/Loader';
 import { Filter } from 'components/Filter/Filter';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsLoading } from 'redux/selectors';
-import { Title, Wrapper } from 'App.styled';
-import { logoutThunk } from 'redux/auth/operations';
-import { Button } from 'styles/Button';
-export const Contacts = () => {
-  const loading = useSelector(selectIsLoading);
+import { selectIsLoading, selectLogin, selectUser } from 'redux/selectors';
+import { StyledTitle, Title, Wrapper } from 'pages/Contacts/Contacts.styled';
+import { fetchContacts } from 'redux/contactsSlice/operations';
 
+const Contacts = () => {
+  const { name } = useSelector(selectUser);
+  const loading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
-  const handleLogout = () => {
-    dispatch(logoutThunk());
-  };
+
+  const isLogin = useSelector(selectLogin);
+
+  useEffect(() => {
+    isLogin && dispatch(fetchContacts());
+  }, [dispatch, isLogin]);
+
   return (
-    <div>
-      <p>mango@mail.com</p>
-      <Button type="button" onClick={handleLogout()}>
-        Logout
-      </Button>
-      <Wrapper>
-        <Title>Phonebook</Title>
-        <ContactForm />
-        <h2>Contacts</h2>
-        <Filter />
-        {loading ? <Loader /> : <ContactList />}
-      </Wrapper>
-    </div>
+    <Wrapper>
+      <StyledTitle>
+        Welcome, {name}! Create contacts to your heart's content.
+      </StyledTitle>
+      <Title>Chronicle of Connections</Title>
+      <ContactForm />
+      <h2>Contacts</h2>
+      <Filter />
+      {loading ? <Loader /> : <ContactList />}
+    </Wrapper>
   );
 };
+export default Contacts;
