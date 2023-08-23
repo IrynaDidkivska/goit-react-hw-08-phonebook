@@ -3,7 +3,7 @@ import { Button } from 'styles/Button';
 import { useDispatch } from 'react-redux';
 import { Input, StyledLink, Wrapper } from './LoginForm.styled';
 import { loginUserThunk } from 'redux/auth/operations';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Form } from 'styles/Form';
 import { toast } from 'react-toastify';
 
@@ -12,14 +12,12 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleLoginForm = e => {
     e.preventDefault();
     const credentials = { email, password };
-    dispatch(loginUserThunk(credentials))
-      .unwrap()
-      .then(() => navigate(location.state?.location || '/contacts'));
+    dispatch(loginUserThunk(credentials));
+
     toast.success(`Welcome to Contactville!`);
   };
 

@@ -11,14 +11,13 @@ export const Loader = () => {
         ariaLabel="MagnifyingGlass-loading"
         wrapperStyle={{}}
         wrapperClass="MagnifyingGlass-wrapper"
-        glassColor="#c0efff"
-        color="#0b9106"
+        glassColor="#00cbff"
+        color="#6721ff"
       />
     </LoaderThumb>
   );
 };
 export const LoaderThumb = styled.div`
-  display: flex;
-
-  margin: 0 auto;
+  /* display: flex;
+  margin: 0 auto; */
 `;

@@ -12,7 +12,6 @@ export const slice = createSlice({
     user: {
       name: '',
       email: '',
-      password: '',
     },
     error: '',
     isLoggedIn: false,
