@@ -17,7 +17,6 @@ const LoginForm = () => {
     e.preventDefault();
     const credentials = { email, password };
     dispatch(loginUserThunk(credentials));
-
     toast.success(`Welcome to Contactville!`);
   };
 

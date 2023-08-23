@@ -3,7 +3,7 @@ import { Button } from 'styles/Button';
 import { Input } from './RegisterForm.styled';
 import { useDispatch } from 'react-redux';
 
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { registerUserThunk } from 'redux/auth/operations';
 import { StyledLink, Wrapper } from 'pages/LoginForm/LoginForm.styled';
 import { Form } from 'styles/Form';
@@ -14,15 +14,12 @@ const RegisterForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const location = useLocation();
   const navigate = useNavigate();
 
   const handleLoginForm = e => {
     e.preventDefault();
     const credentials = { name, password, email };
-    dispatch(registerUserThunk(credentials))
-      .unwrap()
-      .then(() => navigate(location.state?.from || '/'));
+    dispatch(registerUserThunk(credentials));
     toast.success(`Congradulation! Now you can create your Chronicle of
         Connections!`);
   };
