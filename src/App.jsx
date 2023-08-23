@@ -7,6 +7,7 @@ import { selectRefresh } from 'redux/selectors';
 import { Loader } from 'components/Loader/Loader';
 import Footer from 'components/Footer/Footer';
 import NotFound from 'pages/NotFound/NotFound';
+import { LoaderThumb } from 'styles/App.styled';
 
 const Home = lazy(() => import('pages/Home/Home'));
 const LoginForm = lazy(() => import('pages/LoginForm/LoginForm'));
@@ -19,11 +20,13 @@ export const App = () => {
   const dispatch = useDispatch();
   const isRefresh = useSelector(selectRefresh);
   useEffect(() => {
-    dispatch(refreshThunk);
+    dispatch(refreshThunk());
   }, [dispatch]);
 
   return isRefresh ? (
-    <Loader />
+    <LoaderThumb>
+      <Loader />
+    </LoaderThumb>
   ) : (
     <>
       <Routes>
